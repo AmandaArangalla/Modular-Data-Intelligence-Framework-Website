@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataIntel — About</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: #07090f;
+      color: #e4ebf8;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7
+    }
+
+    :root {
+      --accent: #00e5c8;
+      --accent2: #4f8ef7;
+      --amber: #ffb43c;
+      --text2: #8a9ac0;
+      --text3: #4e5e80;
+      --surface: #161c2e;
+      --surface2: #1d2540;
+      --border: rgba(255, 255, 255, .06)
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 15, .92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 60px
+    }
+
+    .brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-decoration: none
+    }
+
+    .brand span:first-child {
+      color: var(--accent)
+    }
+
+    .brand span:last-child {
+      color: #e4ebf8
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none
+    }
+
+    .nav-links a {
+      display: block;
+      padding: .38rem .85rem;
+      font-size: .88rem;
+      color: var(--text2);
+      text-decoration: none;
+      border-radius: 7px;
+      transition: all .15s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #e4ebf8;
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .nav-links a.active {
+      color: var(--accent)
+    }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #07090f !important;
+      font-weight: 600 !important;
+      border-radius: 7px !important;
+      padding: .38rem 1.1rem !important
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem
+    }
+
+    .page-tag {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .75rem
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem
+    }
+
+    .intro {
+      color: var(--text2);
+      font-size: 1rem;
+      max-width: 640px;
+      margin-bottom: 3rem
+    }
+
+    /* Project summary card */
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2.25rem;
+      margin-bottom: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem
+    }
+
+    .project-card h2 {
+      grid-column: 1/-1;
+      font-size: 1.3rem;
+      margin-bottom: 0
+    }
+
+    .pc-block h4 {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text3);
+      margin-bottom: .6rem
+    }
+
+    .pc-block p {
+      font-size: .9rem;
+      color: var(--text2);
+      line-height: 1.75
+    }
+
+    .pc-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .5rem
+    }
+
+    .chip {
+      background: rgba(0, 229, 200, .07);
+      border: 1px solid rgba(0, 229, 200, .18);
+      color: var(--accent);
+      font-size: .74rem;
+      padding: .18rem .6rem;
+      border-radius: 100px
+    }
+
+    /* Supervisor */
+    .supervisor {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap
+    }
+
+    .av {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      overflow: hidden;
+      /* important */
+      border: 2px solid rgba(0, 229, 200, .2);
+      margin: 0 auto 1.25rem;
+      transition: all .2s;
+      background: #111;
+    }
+
+    .av img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tm:hover .av,
+    .tm.exp .av {
+      border-color: rgba(0, 229, 200, .45);
+      transform: scale(1.05);
+    }
+
+    .sv-info h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: .25rem
+    }
+
+    .sv-info p {
+      font-size: .88rem;
+      color: var(--text2);
+      margin-bottom: .25rem
+    }
+
+    .sv-info a {
+      font-size: .84rem;
+      color: var(--accent2);
+      text-decoration: none
+    }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3.5rem
+    }
+
+    .tm {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all .22s
+    }
+
+    .tm:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0, 229, 200, .28)
+    }
+
+    .tm.exp {
+      border-color: rgba(0, 229, 200, .38);
+      background: var(--surface2)
+    }
+
+    .av {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(7, 9, 15, .8);
+      border: 2px solid rgba(0, 229, 200, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 auto 1.25rem;
+      transition: all .2s
+    }
+
+    .tm:hover .av,
+    .tm.exp .av {
+      border-color: rgba(0, 229, 200, .45);
+      background: rgba(0, 229, 200, .07)
+    }
+
+    .tm h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: .25rem
+    }
+
+    .tm .role {
+      font-size: .78rem;
+      color: var(--accent);
+      margin-bottom: .35rem;
+      font-weight: 500
+    }
+
+    .tm .email {
+      font-size: .76rem;
+      color: var(--text3)
+    }
+
+    .tm .email a {
+      color: var(--accent2);
+      text-decoration: none
+    }
+
+    .tm .email a:hover {
+      text-decoration: underline
+    }
+
+    .tm-extra {
+      display: none;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: left
+    }
+
+    .tm.exp .tm-extra {
+      display: block;
+      animation: fi .2s ease
+    }
+
+    @keyframes fi {
+      from {
+        opacity: 0;
+        transform: translateY(4px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .tm-extra p {
+      font-size: .82rem;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: .65rem
+    }
+
+    .skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem
+    }
+
+    .sc {
+      background: rgba(79, 142, 247, .07);
+      border: 1px solid rgba(79, 142, 247, .18);
+      color: var(--accent2);
+      font-size: .7rem;
+      padding: .15rem .55rem;
+      border-radius: 100px
+    }
+
+    /* Achievements */
+    .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem
+    }
+
+    .ach {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .85rem
+    }
+
+    .ach-ico {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px
+    }
+
+    .ach h4 {
+      font-size: .88rem;
+      font-weight: 500;
+      margin-bottom: .2rem
+    }
+
+    .ach p {
+      font-size: .78rem;
+      color: var(--text2)
+    }
+
+    .supervisor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .supervisor-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width:640px) {
+      .project-card {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a class="brand" href="home.html"><span>DATA</span><span>INTEL</span></a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="domain.html">Domain</a></li>
+      <li><a href="milestones.html">Milestones</a></li>
+      <li><a href="documents.html">Documents</a></li>
+      <li><a href="slides.html">Slides</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+  <main>
+    <p class="page-tag">The Team</p>
+    <h1>About Us</h1>
+    <p class="intro">Final year undergraduate research team from SLIIT, competing at the SLASSCOM National Ingenuity
+      Awards 2026. </p>
+
+    <!-- Project summary -->
+    <div class="project-card">
+      <h2>Project at a Glance</h2>
+      <div class="pc-block">
+        <h4>Project title</h4>
+        <p>Modular Real-Time Data Intelligence Framework</p>
+      </div>
+      <!-- <div class="pc-block">
+      <h4>Competition</h4>
+      <p>SLASSCOM National Ingenuity Awards 2026</p>
+    </div> -->
+      <div class="pc-block">
+        <h4>Institution</h4>
+        <p>Sri Lanka Institute of Information Technology (SLIIT), Malabe</p>
+      </div>
+      <div class="pc-block">
+        <h4>Research focus areas</h4>
+        <div class="pc-chips">
+          <span class="chip">Stream Processing</span>
+          <span class="chip">Privacy Engineering</span>
+          <span class="chip">Data Quality</span>
+          <span class="chip">Agentic AI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supervisor -->
+    <h2>Supervision</h2>
+
+    <div class="supervisor-grid">
+
+      <!-- Supervisor -->
+      <div class="supervisor">
+        <div class="av">
+          <img src="images/members/supervisor.png" alt="Dr. Lakmini Abeywardhana">
+        </div>
+        <div class="sv-info">
+          <h3>Dr. Lakmini Abeywardhana</h3>
+          <p>Faculty of Computing | Computer Science</p>
+          <a href="mailto:lakmini.d@sliit.lk">lakmini.d@sliit.lk</a>
+        </div>
+      </div>
+
+      <!-- Co-Supervisor -->
+      <div class="supervisor">
+        <div class="av">
+          <img src="images/members/cosupervisor.png" alt="Co-Supervisor Name">
+        </div>
+        <div class="sv-info">
+          <h3>Dr. Mahima Weerasinghe</h3>
+          <p>Faculty of Computing | Computer Science </p>
+          <a href="mailto:mahima.w@sliit.lk">mahima.w@sliit.lk</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Team -->
+    <h2>Team Members</h2>
+    <div class="team-grid">
+      <div class="tm" onclick="expTm(this)">
+        <div class="av">
+          <img src="images/members/amodhya.png" alt="Amodhya Silva">
+        </div>
+        <h3>Amodhya Silva <br>IT22549136</h3>
+        <p class="role">Agentic Preprocessing</p>
+        <p class="email"><a href="mailto:amodhyasilva@gmail.com">amodhyasilva@gmail.com</a></p>
+        <div class="tm-extra">
+          <p>Developed LLM-led text agent orchestration and benchmark-guided image preprocessing agents with adaptive
+            execution order per record type.</p>
+          <div class="skill-chips"><span class="sc">LangChain</span><span class="sc">GPT API</span><span
+              class="sc">Vision Models</span><span class="sc">Python</span></div>
+        </div>
+      </div>
+
+      <div class="tm" onclick="expTm(this)">
+        <div class="av">
+          <img src="images/members/nanduni.png" alt="Nanduni Weerakoon">
+        </div>
+        <h3>Nanduni Weerakoon <br>IT22204752</h3>
+        <p class="role">Schema Drift</p>
+        <p class="email"><a href="mailto:nanduniweerakoon@gmail.com">nanduniweerakoon@gmail.com</a></p>
+        <div class="tm-extra">
+          <p>Responsible for the real-time schema drift detection service — including risk scoring algorithm, staging
+            queue logic, and integration with Kafka consumers.</p>
+          <div class="skill-chips"><span class="sc">Apache Kafka</span><span class="sc">Python</span><span
+              class="sc">Schema Registry</span><span class="sc">Redis</span></div>
+        </div>
+      </div>
+      <div class="tm" onclick="expTm(this)">
+        <div class="av">
+          <img src="images/members/amanda.png" alt="Amanda Arangalla">
+        </div>
+        <h3>Amanda Arangalla <br>IT22556684</h3>
+        <p class="role">Privacy Preservation</p>
+        <p class="email"><a href="mailto:arangallaamanda@gmail.com">arangallaamanda@gmail.com</a></p>
+        <div class="tm-extra">
+          <p>Designed the attribute-level sensitivity detection and privacy protection service. Implemented masking,
+            tokenization, and suppression strategies with configurable policies.</p>
+          <div class="skill-chips"><span class="sc">NER Models</span><span class="sc">Privacy ML</span><span
+              class="sc">Tokenization</span><span class="sc">Python</span></div>
+        </div>
+      </div>
+      <div class="tm" onclick="expTm(this)">
+        <div class="av">
+          <img src="images/members/lavindi.png" alt="Lavindi Arachchi">
+        </div>
+        <h3>Lavindi Arachchi  <br>IT22893666</h3>
+        <p class="role">Data Quality &amp; Cleaning</p>
+        <p class="email"><a href="mailto:lavindiea11@gmail.com">lavindiea11@gmail.com</a></p>
+        <div class="tm-extra">
+          <p>Built the structured data cleaning service with ML-based quality scoring, outlier detection, and the
+            human-in-the-loop review workflow with a React dashboard.</p>
+          <div class="skill-chips"><span class="sc">Scikit-learn</span><span class="sc">PyTorch</span><span
+              class="sc">React</span><span class="sc">FastAPI</span></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Achievements -->
+    <h2>Achievements &amp; Recognition</h2>
+    <div class="ach-grid">
+      <div class="ach">
+        <div class="ach-ico" style="background:rgba(0,229,200,.09)">🏆</div>
+        <div>
+          <h4>SLASSCOM Competition</h4>
+          <p>Selected to compete at National Ingenuity Awards 2026</p>
+        </div>
+      </div>
+      <div class="ach">
+        <div class="ach-ico" style="background:rgba(79,142,247,.09)">📄</div>
+        <div>
+          <h4>Proposal Approved</h4>
+          <p>Research proposal passed supervisor and panel review</p>
+        </div>
+      </div>
+      <div class="ach">
+        <div class="ach-ico" style="background:rgba(255,180,60,.09)">✅</div>
+        <div>
+          <h4>PP1 Passed</h4>
+          <p>Progress Presentation 1 successfully completed</p>
+        </div>
+      </div>
+      <div class="ach">
+        <div class="ach-ico" style="background:rgba(255,180,60,.09)">✅</div>
+        <div>
+          <h4>PP2 Passed</h4>
+          <p>Progress Presentation 2 successfully completed</p>
+        </div>
+      </div>
+      <!-- <div class="ach">
+      <div class="ach-ico" style="background:rgba(150,100,255,.09)">🔬</div>
+      <div><h4>2 Services Live</h4><p>Schema drift &amp; privacy services in prototype stage</p></div>
+    </div> -->
+    </div>
+  </main>
+  <script>
+    function expTm(card) {
+      const was = card.classList.contains('exp');
+      document.querySelectorAll('.tm').forEach(t => t.classList.remove('exp'));
+      if (!was) card.classList.add('exp');
+    }
+  </script>
+</body>
+
+</html>

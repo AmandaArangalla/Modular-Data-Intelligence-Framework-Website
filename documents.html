@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataIntel — Documents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: #07090f;
+      color: #e4ebf8;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7
+    }
+
+    :root {
+      --accent: #00e5c8;
+      --accent2: #4f8ef7;
+      --amber: #ffb43c;
+      --text2: #8a9ac0;
+      --text3: #4e5e80;
+      --surface: #161c2e;
+      --surface2: #1d2540;
+      --border: rgba(255, 255, 255, .06)
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 15, .92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 60px
+    }
+
+    .brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-decoration: none
+    }
+
+    .brand span:first-child {
+      color: var(--accent)
+    }
+
+    .brand span:last-child {
+      color: #e4ebf8
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none
+    }
+
+    .nav-links a {
+      display: block;
+      padding: .38rem .85rem;
+      font-size: .88rem;
+      color: var(--text2);
+      text-decoration: none;
+      border-radius: 7px;
+      transition: all .15s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #e4ebf8;
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .nav-links a.active {
+      color: var(--accent)
+    }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #07090f !important;
+      font-weight: 600 !important;
+      border-radius: 7px !important;
+      padding: .38rem 1.1rem !important
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem
+    }
+
+    .page-tag {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .75rem
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem
+    }
+
+    .intro {
+      color: var(--text2);
+      font-size: 1rem;
+      max-width: 640px;
+      margin-bottom: 2.5rem
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      align-items: center
+    }
+
+    .fb {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem;
+      padding: .38rem .9rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .fb:hover {
+      color: #e4ebf8;
+      background: var(--surface2)
+    }
+
+    .fb.on {
+      background: rgba(0, 229, 200, .09);
+      border-color: rgba(0, 229, 200, .35);
+      color: var(--accent)
+    }
+
+    .search {
+      flex: 1;
+      max-width: 280px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: #e4ebf8;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem;
+      padding: .38rem 1rem;
+      outline: none;
+      transition: border-color .15s
+    }
+
+    .search:focus {
+      border-color: rgba(0, 229, 200, .35)
+    }
+
+    .search::placeholder {
+      color: var(--text3)
+    }
+
+    /* Stats strip */
+    .stats-strip {
+      display: flex;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 2.5rem
+    }
+
+    .ss-item {
+      flex: 1;
+      padding: .85rem 1.25rem;
+      text-align: center;
+      border-right: 1px solid var(--border)
+    }
+
+    .ss-item:last-child {
+      border-right: none
+    }
+
+    .ss-n {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent)
+    }
+
+    .ss-l {
+      font-size: .75rem;
+      color: var(--text3);
+      margin-top: .15rem
+    }
+
+    /* Doc sections */
+    .doc-section {
+      margin-bottom: 3rem
+    }
+
+    .doc-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: .65rem
+    }
+
+    .doc-section h2::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border)
+    }
+
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: .85rem
+    }
+
+    .doc-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      text-decoration: none;
+      transition: all .18s;
+      position: relative
+    }
+
+    .doc-card:hover {
+      border-color: rgba(0, 229, 200, .3);
+      background: var(--surface2);
+      transform: translateY(-2px)
+    }
+
+    .doc-card.hid {
+      display: none
+    }
+
+    .dico {
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px
+    }
+
+    .it {
+      background: rgba(0, 229, 200, .09)
+    }
+
+    .ib {
+      background: rgba(79, 142, 247, .09)
+    }
+
+    .ia {
+      background: rgba(255, 180, 60, .09)
+    }
+
+    .ip {
+      background: rgba(150, 100, 255, .09)
+    }
+
+    .ir {
+      background: rgba(255, 107, 107, .09)
+    }
+
+    .dinfo h4 {
+      font-size: .9rem;
+      font-weight: 500;
+      color: #e4ebf8;
+      margin-bottom: .2rem
+    }
+
+    .dinfo p {
+      font-size: .78rem;
+      color: var(--text3)
+    }
+
+    .dbadge {
+      margin-left: auto;
+      flex-shrink: 0;
+      font-size: .7rem;
+      font-weight: 500;
+      padding: .2rem .6rem;
+      border-radius: 100px
+    }
+
+    .ba {
+      background: rgba(0, 229, 200, .08);
+      color: var(--accent)
+    }
+
+    .bp {
+      background: rgba(255, 180, 60, .08);
+      color: var(--amber)
+    }
+
+    .doc-card .arrow {
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text3);
+      font-size: .85rem;
+      opacity: 0;
+      transition: opacity .15s, right .15s
+    }
+
+    .doc-card:hover .arrow {
+      opacity: 1;
+      right: 1rem
+    }
+
+    /* Empty state */
+    .empty {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text3);
+      display: none
+    }
+
+    .empty.show {
+      display: block
+    }
+
+    .btn {
+      background: #00e5c8;
+      color: #000;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a class="brand" href="home.html"><span>DATA</span><span>INTEL</span></a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="domain.html">Domain</a></li>
+      <li><a href="milestones.html">Milestones</a></li>
+      <li><a href="documents.html" class="active">Documents</a></li>
+      <li><a href="slides.html">Slides</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+  <main>
+    <p class="page-tag">Documentation</p>
+    <h1>Project Documents</h1>
+    <p class="intro">All documents produced throughout the project. Click any card to view or download. Available
+      documents link directly to the file.</p>
+
+    <div class="stats-strip">
+      <div class="ss-item">
+        <div class="ss-n">4</div>
+        <div class="ss-l">Available</div>
+      </div>
+      <div class="ss-item">
+        <div class="ss-n">4</div>
+        <div class="ss-l">Pending</div>
+      </div>
+      <div class="ss-item">
+        <div class="ss-n">8</div>
+        <div class="ss-l">Total docs</div>
+      </div>
+      <div class="ss-item">
+        <div class="ss-n">100%</div>
+        <div class="ss-l">Coverage</div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <button class="fb on" onclick="filterDocs('all',this)">All</button>
+      <button class="fb" onclick="filterDocs('available',this)">Available</button>
+      <button class="fb" onclick="filterDocs('pending',this)">Pending</button>
+      <button class="fb" onclick="filterDocs('charter',this)">Charter</button>
+      <button class="fb" onclick="filterDocs('proposal',this)">Proposal</button>
+      <button class="fb" onclick="filterDocs('checklist',this)">Checklists</button>
+      <button class="fb" onclick="filterDocs('final',this)">Final reports</button>
+      <input class="search" type="text" placeholder="Search documents..." oninput="searchDocs(this.value)">
+    </div>
+
+    <div class="doc-section" id="sec-charter">
+      <h2>Project Charter</h2>
+      <div class="doc-grid">
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/TAF_25-26J-090.pdf')" data-type="available charter" data-name="project charter document">
+          <div class="dico it">📋</div>
+          <div class="dinfo">
+            <h4>Project Charter</h4>
+            <p>Scope, team &amp; objectives</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-section" id="sec-proposal">
+      <h2>Proposal</h2>
+      <div class="doc-grid">
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/Group_Proposal_25-26J-090.pdf')" data-type="available proposal" data-name="proposal document">
+          <div class="dico ib">📄</div>
+          <div class="dinfo">
+            <h4>Proposal Document</h4>
+            <p>Full research proposal</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-section" id="sec-checklists">
+      <h2>Checklists</h2>
+      <div class="doc-grid">
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/Data Analysis Report.pdf')" data-type="available checklist" data-name="checklist phase 1 data analysis report">
+          <div class="dico ia">✅</div>
+          <div class="dinfo">
+            <h4>Checklist 1</h4>
+            <p>Data Analysis Report</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="doc-card" href="assets/docs/MasterSheetOfResearchPapersStudied.xlsx"
+          download="MasterSheetOfResearchPapersStudied.xlsx" data-type="available checklist"
+          data-name="checklist phase 1 master sheet research papers">
+
+          <div class="dico ia">✅</div>
+
+          <div class="dinfo">
+            <h4>Checklist 2</h4>
+            <p>Master Sheet of Research Papers</p>
+          </div>
+
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+
+        </a>
+        <br>
+        <!-- add the actual checklist 2 when available -->
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/MLOps Report.pdf')" data-type="available checklist" data-name="checklist phase 2 mlops report"> 
+          <div class="dico ia">✅</div>
+          <div class="dinfo">
+            <h4>Checklist 3</h4>
+            <p>MLOps Report</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/Ethical_Analysis_Report.pdf')" data-type="available checklist" data-name="checklist phase 2 ethical analysis report">
+          <div class="dico ia">✅</div>
+          <div class="dinfo">
+            <h4>Checklist 4</h4>
+            <p>Ethical Analysis Report</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-section" id="sec-final">
+      <h2>Final Reports</h2>
+      <div class="doc-grid">
+        <!-- ######################## -->
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/Data Analysis Report.pdf')" data-type="available final" data-name="final complete thesis document"> 
+          <div class="dico ip">📑</div>
+          <div class="dinfo">
+            <h4>Main</h4>
+            <p>Complete thesis document</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+        <!-- ######################## -->
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/Data Analysis Report.pdf')" data-type="available final" data-name="final amodhya thesis document">
+          <div class="dico ip">📑</div>
+          <div class="dinfo">
+            <h4>Amodhya <br>(IT22549136)</h4>
+            <p>Agentic Preprocessing</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+        <!-- ######################## -->
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/Data Analysis Report.pdf')" data-type="available final" data-name="final nanduni thesis document">
+          <div class="dico ip">📑</div>
+          <div class="dinfo">
+            <h4>Nanduni <br>(IT22204752)</h4>
+            <p>Schema Drift Detection</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+        <!-- ######################## -->
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/Data Analysis Report.pdf')" data-type="available final" data-name="final amanda thesis document">
+          <div class="dico ip">📑</div>
+          <div class="dinfo">
+            <h4>Amanda <br>(IT22556684)</h4>
+            <p> Data Privacy Preservation</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+        <!-- ######################## -->
+        <a class="doc-card" href="#" onclick="window.open('assets/docs/Data Analysis Report.pdf')" data-type="available final" data-name="final lavindi thesis document">
+          <div class="dico ip">📑</div>
+          <div class="dinfo">
+            <h4>Lavindi <br>(IT22893666)</h4>
+            <p> Data Quality & Cleaning</p>
+          </div>
+          <span class="dbadge ba">Available</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="empty" id="empty-state">No documents match your search.</div>
+  </main>
+  <script>
+    function filterDocs(type, btn) {
+      document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      document.querySelectorAll('.doc-card').forEach(c => {
+        const t = c.dataset.type || '';
+        c.classList.toggle('hid', type !== 'all' && !t.includes(type));
+      });
+      checkEmpty();
+    }
+    function searchDocs(q) {
+      const lq = q.toLowerCase();
+      document.querySelectorAll('.doc-card').forEach(c => {
+        const n = (c.dataset.name || '').toLowerCase();
+        c.classList.toggle('hid', q.length > 0 && !n.includes(lq));
+      });
+      checkEmpty();
+    }
+    function checkEmpty() {
+      const vis = [...document.querySelectorAll('.doc-card')].filter(c => !c.classList.contains('hid'));
+      document.getElementById('empty-state').classList.toggle('show', vis.length === 0);
+    }
+    function openPDF(file) {
+      document.getElementById('pdfModal').style.display = 'block';
+      document.getElementById('pdfFrame').src = file;
+      document.getElementById('downloadBtn').href = file;
+    }
+
+    function closePDF() {
+      document.getElementById('pdfModal').style.display = 'none';
+      document.getElementById('pdfFrame').src = '';
+    }
+  </script>
+  <div id="pdfModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999;">
+
+    <div
+      style="display:flex; justify-content:space-between; align-items:center; padding:12px 20px; background:#161c2e;">
+      <h3 style="margin:0; font-size:14px;">Document Viewer</h3>
+
+      <div style="display:flex; gap:10px;">
+        <a id="downloadBtn" class="btn" download>Download</a>
+        <button onclick="closePDF()"
+          style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">✕</button>
+      </div>
+    </div>
+
+    <iframe id="pdfFrame" style="width:100%; height:calc(100% - 60px); border:none;"></iframe>
+  </div>
+</body>
+
+</html>

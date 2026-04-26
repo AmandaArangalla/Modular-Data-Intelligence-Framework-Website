@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataIntel — Slides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: #07090f;
+      color: #e4ebf8;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7
+    }
+
+    :root {
+      --accent: #00e5c8;
+      --accent2: #4f8ef7;
+      --amber: #ffb43c;
+      --text2: #8a9ac0;
+      --text3: #4e5e80;
+      --surface: #161c2e;
+      --surface2: #1d2540;
+      --border: rgba(255, 255, 255, .06)
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 15, .92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 60px
+    }
+
+    .brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-decoration: none
+    }
+
+    .brand span:first-child {
+      color: var(--accent)
+    }
+
+    .brand span:last-child {
+      color: #e4ebf8
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none
+    }
+
+    .nav-links a {
+      display: block;
+      padding: .38rem .85rem;
+      font-size: .88rem;
+      color: var(--text2);
+      text-decoration: none;
+      border-radius: 7px;
+      transition: all .15s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #e4ebf8;
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .nav-links a.active {
+      color: var(--accent)
+    }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #07090f !important;
+      font-weight: 600 !important;
+      border-radius: 7px !important;
+      padding: .38rem 1.1rem !important
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem
+    }
+
+    .page-tag {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .75rem
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem
+    }
+
+    .intro {
+      color: var(--text2);
+      font-size: 1rem;
+      max-width: 640px;
+      margin-bottom: 2.5rem
+    }
+
+    /* Count chip */
+    .count-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem
+    }
+
+    .count-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .65rem 1.1rem;
+      font-size: .82rem;
+      color: var(--accent)
+    }
+
+    .count-chip span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-right: .35rem
+    }
+
+    /* Slides grid */
+    .slides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem
+    }
+
+    .slide-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: all .22s;
+      position: relative
+    }
+
+    .slide-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 229, 200, .4)
+    }
+
+    /* Thumbnail */
+    .thumb {
+      height: 160px;
+      background: #0c1018;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .thumb-inner {
+      width: 72%;
+      height: 68%;
+      border-radius: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .35rem;
+      padding: .75rem
+    }
+
+    .thumb-title {
+      font-size: .68rem;
+      font-weight: 600;
+      color: #e4ebf8;
+      text-align: center;
+      font-family: 'Syne', sans-serif
+    }
+
+    .thumb-sub {
+      font-size: .62rem;
+      text-align: center
+    }
+
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .2s;
+      font-size: 1.5rem;
+      background: rgba(0, 0, 0, .3)
+    }
+
+    .slide-card:hover .thumb-overlay {
+      opacity: 1
+    }
+
+    .slide-tag.pending {
+      background: rgba(255, 180, 60, .12);
+      color: var(--amber);
+    }
+
+    .slide-card.pending {
+      cursor: default;
+      opacity: .88;
+    }
+
+    .slide-card.pending:hover {
+      transform: none;
+      border-color: rgba(255, 180, 60, .28);
+    }
+
+    .slide-card.pending .thumb-overlay {
+      display: none;
+    }
+
+    .slide-btn.pending {
+      border-color: rgba(255, 180, 60, .3);
+      background: rgba(255, 180, 60, .08);
+      color: var(--amber);
+      cursor: not-allowed;
+    }
+
+    .slide-tag {
+      position: absolute;
+      top: .75rem;
+      left: .75rem;
+      font-size: .68rem;
+      font-weight: 600;
+      padding: .22rem .65rem;
+      border-radius: 100px;
+      background: rgba(0, 229, 200, .12);
+      color: var(--accent)
+    }
+
+    /* Body */
+    .slide-body {
+      padding: 1.25rem 1.5rem
+    }
+
+    .slide-body h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: .3rem
+    }
+
+    .slide-body p {
+      font-size: .82rem;
+      color: var(--text2);
+      margin-bottom: .85rem
+    }
+
+    .slide-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem
+    }
+
+    .slide-date {
+      font-size: .75rem;
+      color: var(--text3)
+    }
+
+    .slide-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .78rem;
+      font-weight: 500;
+      padding: .3rem .85rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all .15s;
+      border: 1px solid;
+      background: rgba(0, 229, 200, .08);
+      border-color: rgba(0, 229, 200, .3);
+      color: var(--accent)
+    }
+
+    .slide-btn:hover {
+      background: rgba(0, 229, 200, .16)
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a class="brand" href="home.html"><span>DATA</span><span>INTEL</span></a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="domain.html">Domain</a></li>
+      <li><a href="milestones.html">Milestones</a></li>
+      <li><a href="documents.html">Documents</a></li>
+      <li><a href="slides.html" class="active">Slides</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+  <main>
+    <p class="page-tag">Presentation Slides</p>
+    <h1>Slides</h1>
+    <p class="intro">Presentation slides from completed milestones. New slides will be added after each presentation.
+    </p>
+
+    <div class="count-row">
+      <div class="count-chip"><span>3</span>Available</div>
+      <div class="count-chip"><span>1</span>Pending</div>
+    </div>
+
+    <div class="slides-grid">
+
+      <div class="slide-card" onclick="window.open('assets/slides/ProposalPresentation.pdf')">
+        <div class="thumb">
+          <div class="thumb-inner">
+            <div class="thumb-title">Proposal Presentation</div>
+            <div class="thumb-sub" style="color:var(--accent2)">Framework Overview</div>
+          </div>
+          <span class="slide-tag">Available</span>
+          <div class="thumb-overlay">Click to view</div>
+        </div>
+        <div class="slide-body">
+          <h3>Proposal Presentation</h3>
+          <p>Problem definition, proposed solution architecture, methodology, and initial literature review.</p>
+          <div class="slide-meta">
+            <span class="slide-date">Semester 1</span>
+            <a href="assets/slides/ProposalPresentation.pdf" target="_blank" class="slide-card"></a>
+            <a href="assets/slides/ProposalPresentation.pdf" download class="slide-btn">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-card" onclick="window.open('assets/slides/PP1.pdf')">
+        <div class="thumb">
+          <div class="thumb-inner">
+            <div class="thumb-title">Proposal Presentation 1</div>
+            <div class="thumb-sub" style="color:var(--accent2)">Initial Implementation</div>
+          </div>
+          <span class="slide-tag">Available</span>
+          <div class="thumb-overlay">Click to view</div>
+        </div>
+
+        <div class="slide-body">
+          <h3>Proposal Presentation 1</h3>
+          <p>Initial implementation of the proposed framework.</p>
+          <div class="slide-meta">
+            <span class="slide-date">Semester 1</span>
+            <a href="assets/slides/PP1.pdf" target="_blank" class="slide-card"></a>
+            <a href="assets/slides/PP1.pdf" download class="slide-btn">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-card" onclick="window.open('assets/slides/PP2.pdf')">
+        <div class="thumb">
+          <div class="thumb-inner">
+            <div class="thumb-title">Proposal Presentation 2</div>
+            <div class="thumb-sub" style="color:var(--accent2)">Advanced Implementation</div>
+          </div>
+          <span class="slide-tag">Available</span>
+          <div class="thumb-overlay">Click to view</div>
+        </div>
+
+        <div class="slide-body">
+          <h3>Proposal Presentation 2</h3>
+          <p>Advanced implementation and testing of the proposed framework.</p>
+          <div class="slide-meta">
+            <span class="slide-date">Semester 2</span>
+            <a href="assets/slides/PP2.pdf" target="_blank" class="slide-card"></a>
+            <a href="assets/slides/PP2.pdf" download class="slide-btn">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="slide-card pending" aria-label="Final Presentation slides pending">
+        <div class="thumb">
+          <div class="thumb-inner">
+            <div class="thumb-title">Final Presentation</div>
+            <div class="thumb-sub" style="color:var(--amber)">Final Assessment</div>
+          </div>
+          <span class="slide-tag pending">Pending</span>
+        </div>
+
+        <div class="slide-body">
+          <h3>Final Presentation</h3>
+          <p>Final system demonstration slides will be added after completion of the final assessment.</p>
+          <div class="slide-meta">
+            <span class="slide-date">Semester 3</span>
+            <span class="slide-btn pending">Pending</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <script>
+  document.querySelectorAll('.slide-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
+</script>
+</body>
+
+</html>

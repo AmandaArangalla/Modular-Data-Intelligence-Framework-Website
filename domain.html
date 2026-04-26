@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataIntel — Domain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: #07090f;
+      color: #e4ebf8;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden
+    }
+
+    :root {
+      --accent: #00e5c8;
+      --accent2: #4f8ef7;
+      --amber: #ffb43c;
+      --text2: #8a9ac0;
+      --text3: #4e5e80;
+      --surface: #161c2e;
+      --surface2: #1d2540;
+      --border: rgba(255, 255, 255, .06);
+      --bg2: #0c1018
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 15, .92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 60px
+    }
+
+    .brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-decoration: none
+    }
+
+    .brand span:first-child {
+      color: var(--accent)
+    }
+
+    .brand span:last-child {
+      color: #e4ebf8
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none
+    }
+
+    .nav-links a {
+      display: block;
+      padding: .38rem .85rem;
+      font-size: .88rem;
+      color: var(--text2);
+      text-decoration: none;
+      border-radius: 7px;
+      transition: all .15s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #e4ebf8;
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .nav-links a.active {
+      color: var(--accent)
+    }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #07090f !important;
+      font-weight: 600 !important;
+      border-radius: 7px !important;
+      padding: .38rem 1.1rem !important
+    }
+
+    .nav-cta:hover {
+      background: #00cdb6 !important
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem
+    }
+
+    .page-tag {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .75rem
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem
+    }
+
+    h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: .65rem
+    }
+
+    .intro {
+      color: var(--text2);
+      font-size: 1rem;
+      max-width: 640px;
+      margin-bottom: 2.5rem
+    }
+
+    /* Tab bar */
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin: 0 auto 2.5rem;
+      padding: 6px;
+      width: 100%;
+    }
+
+    .tb {
+      background: transparent;
+      border: none;
+      color: var(--text2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .85rem;
+      padding: .45rem 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap
+    }
+
+    .tb:hover {
+      color: #e4ebf8;
+      background: rgba(255, 255, 255, .04)
+    }
+
+    .tb.on {
+      background: var(--surface2);
+      color: #e4ebf8;
+      box-shadow: 0 0 0 1px rgba(0, 229, 200, .2)
+    }
+
+    .tp {
+      display: none;
+      animation: fi .2s ease
+    }
+
+    .tp.on {
+      display: block
+    }
+
+    @keyframes fi {
+      from {
+        opacity: 0;
+        transform: translateY(5px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* Cards */
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem
+    }
+
+    .grid2.s1 {
+      grid-template-columns: 1fr
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: border-color .2s, transform .2s
+    }
+
+    .card:hover {
+      border-color: rgba(0, 229, 200, .25);
+      transform: translateY(-2px)
+    }
+
+    .card.span2 {
+      grid-column: 1/-1
+    }
+
+    .cico {
+      width: 40px;
+      height: 40px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 1.2rem
+    }
+
+    .it {
+      background: rgba(0, 229, 200, .09)
+    }
+
+    .ib {
+      background: rgba(79, 142, 247, .09)
+    }
+
+    .ir {
+      background: rgba(255, 107, 107, .09)
+    }
+
+    .ia {
+      background: rgba(255, 180, 60, .09)
+    }
+
+    .ip {
+      background: rgba(150, 100, 255, .09)
+    }
+
+    .card p,
+    .card li {
+      color: var(--text2);
+      font-size: .9rem;
+      line-height: 1.75
+    }
+
+    .card ul {
+      list-style: none;
+      margin-top: .65rem
+    }
+
+    .card li {
+      padding: .25rem 0 .25rem 1.1rem;
+      position: relative
+    }
+
+    .card li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: .78rem;
+      top: .28rem
+    }
+
+    .sub2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: .85rem
+    }
+
+    .sub2 h4 {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text3);
+      margin-bottom: .5rem
+    }
+
+    /* Accordion */
+    .acc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: .6rem;
+      overflow: hidden
+    }
+
+    .acc-h {
+      width: 100%;
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.5rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      font-weight: 500;
+      color: #e4ebf8;
+      text-align: left;
+      transition: background .15s
+    }
+
+    .acc-h:hover {
+      background: rgba(255, 255, 255, .03)
+    }
+
+    .acc-h.open {
+      color: var(--accent)
+    }
+
+    .acc-ic {
+      font-size: 1.1rem;
+      color: var(--text3);
+      transition: transform .2s;
+      flex-shrink: 0
+    }
+
+    .acc-h.open .acc-ic {
+      transform: rotate(45deg);
+      color: var(--accent)
+    }
+
+    .acc-b {
+      display: none;
+      padding: 0 1.5rem 1.25rem;
+      font-size: .9rem;
+      color: var(--text2);
+      line-height: 1.75
+    }
+
+    .acc-b.open {
+      display: block
+    }
+
+    /* Pipeline */
+    .pipe {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 1.5rem 0
+    }
+
+    .ps {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .52rem .9rem;
+      font-size: .82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s
+    }
+
+    .ps:hover {
+      background: var(--surface2)
+    }
+
+    .pdot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .parr {
+      color: var(--text3);
+      font-size: .85rem
+    }
+
+    .pipe-detail {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: .5rem;
+      transition: border-color .2s
+    }
+
+    /* Services */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.25rem
+    }
+
+    .svc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: all .2s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .svc::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .svc:hover {
+      transform: translateY(-4px)
+    }
+
+    .svc:hover::after {
+      opacity: 1
+    }
+
+    .svc.t:hover {
+      border-color: rgba(0, 229, 200, .38)
+    }
+
+    .svc.b:hover {
+      border-color: rgba(79, 142, 247, .38)
+    }
+
+    .svc.a:hover {
+      border-color: rgba(255, 180, 60, .38)
+    }
+
+    .svc.p:hover {
+      border-color: rgba(150, 100, 255, .38)
+    }
+
+    .svc.t::after {
+      background: rgba(0, 229, 200, .03)
+    }
+
+    .svc.b::after {
+      background: rgba(79, 142, 247, .03)
+    }
+
+    .svc.a::after {
+      background: rgba(255, 180, 60, .03)
+    }
+
+    .svc.p::after {
+      background: rgba(150, 100, 255, .03)
+    }
+
+    .snum {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      opacity: .1;
+      line-height: 1;
+      margin-bottom: .65rem
+    }
+
+    .svc.t .snum {
+      color: var(--accent)
+    }
+
+    .svc.b .snum {
+      color: var(--accent2)
+    }
+
+    .svc.a .snum {
+      color: var(--amber)
+    }
+
+    .svc.p .snum {
+      color: #9664ff
+    }
+
+    .spill {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 500;
+      padding: .2rem .65rem;
+      border-radius: 100px;
+      margin-bottom: .75rem
+    }
+
+    .svc.t .spill {
+      background: rgba(0, 229, 200, .1);
+      color: var(--accent)
+    }
+
+    .svc.b .spill {
+      background: rgba(79, 142, 247, .1);
+      color: var(--accent2)
+    }
+
+    .svc.a .spill {
+      background: rgba(255, 180, 60, .1);
+      color: var(--amber)
+    }
+
+    .svc.p .spill {
+      background: rgba(150, 100, 255, .1);
+      color: #9664ff
+    }
+
+    .svc p {
+      font-size: .88rem;
+      color: var(--text2);
+      margin-top: .5rem;
+      line-height: 1.7
+    }
+
+    .svc ul {
+      list-style: none;
+      margin-top: .85rem
+    }
+
+    .svc li {
+      font-size: .83rem;
+      color: var(--text2);
+      padding: .2rem 0 .2rem 1rem;
+      position: relative
+    }
+
+    .svc li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+      line-height: 1.2
+    }
+
+    .svc.t li::before {
+      color: var(--accent)
+    }
+
+    .svc.b li::before {
+      color: var(--accent2)
+    }
+
+    .svc.a li::before {
+      color: var(--amber)
+    }
+
+    .svc.p li::before {
+      color: #9664ff
+    }
+
+    /* Tech tabs */
+    .ttbar {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem
+    }
+
+    .ttb {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .8rem;
+      padding: .35rem .85rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .ttb:hover {
+      color: #e4ebf8;
+      background: var(--surface2)
+    }
+
+    .ttb.on {
+      background: rgba(0, 229, 200, .09);
+      border-color: rgba(0, 229, 200, .3);
+      color: var(--accent)
+    }
+
+    .tpanel {
+      display: none
+    }
+
+    .tpanel.on {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: .65rem;
+      animation: fi .2s
+    }
+
+    .tchip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .55rem .85rem;
+      font-size: .82rem;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      transition: all .15s
+    }
+
+    .tchip:hover {
+      border-color: rgba(0, 229, 200, .25);
+      color: #e4ebf8
+    }
+
+    .tcd {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(79, 142, 247, .07);
+      border: 1px solid rgba(79, 142, 247, .18);
+      color: var(--accent2);
+      font-size: .75rem;
+      padding: .18rem .6rem;
+      border-radius: 100px
+    }
+
+    @media(max-width:768px) {
+      .grid2 {
+        grid-template-columns: 1fr
+      }
+
+      .card.span2 {
+        grid-column: 1
+      }
+
+      .sub2 {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a class="brand" href="home.html"><span>DATA</span><span>INTEL</span></a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="domain.html" class="active">Domain</a></li>
+      <li><a href="milestones.html">Milestones</a></li>
+      <li><a href="documents.html">Documents</a></li>
+      <li><a href="slides.html">Slides</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+  <main>
+    <p class="page-tag">Research Domain</p>
+    <!-- <h1>Understanding the problem space</h1>
+  <p class="intro">Explore the literature, gap, objectives, methodology, four services, and technologies behind our research framework.</p> -->
+
+    <div class="tab-bar">
+      <button class="tb on" onclick="dTab('overview',this)">Overview</button>
+      <button class="tb" onclick="dTab('gap',this)">Research gap</button>
+      <button class="tb" onclick="dTab('objectives',this)">Objectives</button>
+      <button class="tb" onclick="dTab('methodology',this)">Methodology</button>
+      <button class="tb" onclick="dTab('hlarchitecture',this)">High Level Architecture</button>
+      <button class="tb" onclick="dTab('services',this)">Four services</button>
+      <button class="tb" onclick="dTab('tech',this)">Technologies</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="tp on" id="dt-overview">
+      <div class="grid2">
+        <div class="card">
+          <div class="cico ir">?</div>
+          <h3> CORE PROBLEM</CORE>
+          </h3>
+          <p>Streaming pipelines fail quietly. Incoming data changes faster than conventional systems adapt — breaking
+            dashboards, violating privacy, and eroding trust in real-time decisions.</p>
+          <ul>
+            <li>Silent schema drift breaks downstream APIs and models</li>
+            <li>Privacy exposure occurs in transit, before storage protection</li>
+            <li>Poor structured quality reduces analytics confidence</li>
+            <li>Unstructured text and images need adaptive preprocessing</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="cico it">💡</div>
+          <h3>OUR RESPONSE</h3>
+          <p>A modular preprocessing layer sitting upstream of your pipeline — detecting issues early, applying
+            protection, and routing data before downstream damage occurs.</p>
+          <ul>
+            <li>Real-time schema drift detection and routing</li>
+            <li>Pre-storage sensitive attribute protection</li>
+            <li>Automated cleaning with human-in-the-loop review</li>
+            <li>Agent-based preprocessing for unstructured data</li>
+          </ul>
+        </div>
+        <div class="card span2">
+          <div class="cico ib">🏗</div>
+          <h3>WHO BENEFITS</h3>
+          <p>Four independent services. Any execution order. Fits your architecture.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem"><span class="chip">Data engineering
+              teams</span><span class="chip">AI &amp; analytics teams</span><span class="chip">Privacy-sensitive
+              orgs</span><span class="chip">Streaming pipeline enterprises</span><span
+              class="chip">Healthcare</span><span class="chip">Finance</span><span class="chip">Retail &amp;
+              logistics</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAP -->
+    <div class="tp" id="dt-gap">
+      <div class="grid2">
+        <div class="card">
+          <div class="cico ir">🔍</div>
+          <h3>LITERATURE SURVEY SUMMARY</h3>
+          <p>Existing work addresses pipeline issues in isolation. No current system provides a unified, real-time,
+            modular preprocessing layer combining all four dimensions.</p>
+          <ul>
+            <li>Kafka/Flink: strong infra, no quality layer</li>
+            <li>Schema evolution: mostly batch-mode, not real-time routing</li>
+            <li>Privacy: applied post-storage only</li>
+            <li>Data quality: ML imputation not streaming-integrated</li>
+            <li>Agentic AI: isolated agents, no coordinated pipeline use</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="cico ib">🔬</div>
+          <h3>IDENTIFIED GAP</h3>
+          <p>No existing solution offers a <span style="color:var(--accent)">modular, execution-order-flexible</span>
+            preprocessing service layer combining all four dimensions in real time with user-in-the-loop control.</p>
+          <div class="sub2">
+            <div>
+              <h4>What's missing</h4>
+              <ul class="card" style="border:none;padding:0;background:none">
+                <li>Composable, non-siloed modules</li>
+                <li>Pre-transit privacy protection</li>
+                <li>Human review for risky records</li>
+                <li>Unified unstructured handling</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Our contribution</h4>
+              <ul class="card" style="border:none;padding:0;background:none">
+                <li>Four independent services</li>
+                <li>Attribute-level pre-storage privacy</li>
+                <li>Staging queue + review workflow</li>
+                <li>LLM + vision agent coordination</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card span2">
+          <div class="cico ip">?</div>
+          <h3>RESEARCH PROBLEM STATEMENT</h3>
+          <p style="font-size:1rem;color:#e4ebf8">How can we design a <em
+              style="color:var(--accent);font-style:normal">modular, composable</em> preprocessing framework for
+            real-time streaming data that detects and resolves schema drift, privacy exposure, data quality issues, and
+            unstructured content complexity — without imposing a fixed execution order?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OBJECTIVES -->
+    <div class="tp" id="dt-objectives">
+      <div style="display:flex;flex-direction:column;gap:.6rem">
+        <div class="acc"><button class="acc-h" onclick="tAcc(this)"><span>Design four independently deployable service
+              modules</span><span class="acc-ic">+</span></button>
+          <div class="acc-b">
+            <p>Each service operates as a standalone microservice deployable independently or orchestrated in
+              combination. </p>
+          </div>
+        </div>
+        <div class="acc"><button class="acc-h" onclick="tAcc(this)"><span>Implement real-time schema drift detection
+              with risk-based routing</span><span class="acc-ic">+</span></button>
+          <div class="acc-b">
+            <p>Monitor structured data streams for added columns, removed columns, type changes, and renamed fields.
+              Assign risk scores based on severity and route risky records to a staging area for human review before
+              final acceptance.</p>
+          </div>
+        </div>
+        <div class="acc"><button class="acc-h" onclick="tAcc(this)"><span>Apply pre-storage privacy protection at
+              attribute level</span><span class="acc-ic">+</span></button>
+          <div class="acc-b">
+            <p>Identify sensitive attributes in streaming records and apply suitable protection (masking, tokenization,
+              suppression) before records reach storage or onward transfer — reducing exposure during transit.</p>
+          </div>
+        </div>
+        <div class="acc"><button class="acc-h" onclick="tAcc(this)"><span>Automate structured data cleaning with human
+              review support</span><span class="acc-ic">+</span></button>
+          <div class="acc-b">
+            <p>Detect missing values, outliers, and invalid entries. Generate candidate corrective actions using rules,
+              statistics, and ML. Allow users to confirm or override fixes. Track quality scores before and after
+              cleaning.</p>
+          </div>
+        </div>
+        <div class="acc"><button class="acc-h" onclick="tAcc(this)"><span>Develop agentic preprocessing for text and
+              image streams</span><span class="acc-ic">+</span></button>
+          <div class="acc-b">
+            <p>Coordinate LLM-led agents for text preprocessing and benchmark-guided vision agents for image
+              preprocessing. Adaptive execution order per record type. Outputs stored in structured format ready for
+              downstream use.</p>
+          </div>
+        </div>
+        <div class="acc"><button class="acc-h" onclick="tAcc(this)"><span>Validate across realistic streaming pipeline
+              scenarios</span><span class="acc-ic">+</span></button>
+          <div class="acc-b">
+            <p>Benchmark each service against realistic workloads. Measure latency overhead, detection accuracy, privacy
+              preservation quality, and data quality score improvements against baseline systems.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- METHODOLOGY -->
+    <div class="tp" id="dt-methodology">
+      <p style="color:var(--text2);font-size:.95rem;margin-bottom:1.5rem">Each service follows a four-stage pipeline.
+        Click a stage to learn more.</p>
+      <div class="pipe">
+        <div class="ps" id="ps0" onclick="setPipe(0)" style="border-color:rgba(0,229,200,.3);color:var(--accent)"><span
+            class="pdot" style="background:var(--accent)"></span>Detect</div>
+        <span class="parr">→</span>
+        <div class="ps" id="ps1" onclick="setPipe(1)"><span class="pdot"
+            style="background:var(--accent2)"></span>Evaluate</div>
+        <span class="parr">→</span>
+        <div class="ps" id="ps2" onclick="setPipe(2)"><span class="pdot" style="background:var(--amber)"></span>Act
+        </div>
+        <span class="parr">→</span>
+        <div class="ps" id="ps3" onclick="setPipe(3)"><span class="pdot" style="background:#9664ff"></span>Control</div>
+      </div>
+      <div class="pipe-detail" id="pipe-detail">
+        <h3 id="pd-title" style="color:var(--accent);margin-bottom:.6rem">Detect</h3>
+        <p id="pd-body" style="color:var(--text2);font-size:.9rem">Identify drift, sensitive fields, quality issues, or
+          preprocessing needs in real time as records arrive. Each service runs its detector independently on the
+          incoming data stream.</p>
+      </div>
+      <div class="grid2" style="margin-top:1.5rem">
+        <div class="card">
+          <div class="cico ib">🏛</div>
+          <h3>Architecture</h3>
+          <ul>
+            <li>Service-oriented, event-driven design</li>
+            <li>Kafka topics per service module</li>
+            <li>Stateless services with Redis shared state</li>
+            <li>Staging queues for deferred human decisions</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="cico it">⚙</div>
+          <h3>Key design advantage</h3>
+          <p>The four services are <span style="color:var(--accent)">independent</span>. Users can adopt one module
+            only, combine selected modules, or arrange execution order to match their pipeline — no lock-in to a fixed
+            sequence.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIGH LEVEL ARCHITECTURE -->
+    <div class="tp" id="dt-hlarchitecture">
+      <div class="card span2" style="text-align:center">
+        <!-- <div class="cico ib">🏗</div> -->
+        <h3>HIGH LEVEL ARCHITECTURE DIAGRAM</h3>
+        <p style="margin-bottom:1.5rem;color:var(--text2)">
+          Overview of the DataIntel streaming preprocessing framework.
+        </p>
+
+        <img src="images/high-level-architecture.png" alt="High Level Architecture Diagram"
+          style="max-width:100%;border-radius:12px;border:1px solid var(--border)" />
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="tp" id="dt-services">
+      <div class="svc-grid">
+        <div class="svc t">
+          <div class="spill">Service 01</div>
+          <div class="snum">01</div>
+          <h3 style="color:var(--accent)">Schema Drift Detection</h3>
+          <p>Detects added columns, removed columns, type changes, and renamed columns in structured data streams.</p>
+          <ul>
+            <li>Real-time schema monitoring</li>
+            <li>Risk scoring by severity</li>
+            <li>Routing of risky records to staging</li>
+            <li>User review before final acceptance</li>
+          </ul>
+        </div>
+        <div class="svc b">
+          <div class="spill">Service 02</div>
+          <div class="snum">02</div>
+          <h3 style="color:var(--accent2)">Privacy Preservation</h3>
+          <p>Finds sensitive attributes and applies suitable protection before storage or onward transfer.</p>
+          <ul>
+            <li>Attribute-level sensitivity identification</li>
+            <li>Privacy action before storage</li>
+            <li>Reduced exposure during transit</li>
+            <li>Retained analytical value</li>
+          </ul>
+        </div>
+        <div class="svc a">
+          <div class="spill">Service 03</div>
+          <div class="snum">03</div>
+          <h3 style="color:var(--amber)">Structured Data Cleaning</h3>
+          <p>Detects quality issues and recommends corrective actions using rules, statistics, and ML.</p>
+          <ul>
+            <li>Missing value and outlier detection</li>
+            <li>Suggested fixes with user choice</li>
+            <li>Automatic fill for unresolved cases</li>
+            <li>Updated quality score after cleaning</li>
+          </ul>
+        </div>
+        <div class="svc p">
+          <div class="spill">Service 04</div>
+          <div class="snum">04</div>
+          <h3 style="color:#9664ff">Agentic Preprocessing</h3>
+          <p>Handles text and image streams through coordinated agents that prepare unstructured data for downstream
+            use.</p>
+          <ul>
+            <li>LLM-led orchestration for text agents</li>
+            <li>Benchmark-guided image agents</li>
+            <li>Adaptive execution order per record</li>
+            <li>Structured output storage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECHNOLOGIES -->
+    <div class="tp" id="dt-tech">
+      <div class="ttbar">
+        <button class="ttb on" onclick="tTech('data',this)">Data layer</button>
+        <button class="ttb" onclick="tTech('ai',this)">AI &amp; ML</button>
+        <button class="ttb" onclick="tTech('infra',this)">Infrastructure</button>
+        <button class="ttb" onclick="tTech('fe',this)">Frontend</button>
+      </div>
+      <div class="tpanel on" id="tt-data">
+        <div class="tchip"><span class="tcd" style="background:var(--accent)"></span>Apache Kafka</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent)"></span>Apache Flink</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent)"></span>Apache Spark</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent)"></span>PostgreSQL</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent)"></span>Redis</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent)"></span>Schema Registry</div>
+      </div>
+      <div class="tpanel" id="tt-ai">
+        <div class="tchip"><span class="tcd" style="background:var(--accent2)"></span>LLM Orchestration</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent2)"></span>GPT / Claude API</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent2)"></span>Scikit-learn</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent2)"></span>PyTorch</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent2)"></span>Vision Models</div>
+        <div class="tchip"><span class="tcd" style="background:var(--accent2)"></span>LangChain</div>
+      </div>
+      <div class="tpanel" id="tt-infra">
+        <div class="tchip"><span class="tcd" style="background:var(--amber)"></span>Docker</div>
+        <div class="tchip"><span class="tcd" style="background:var(--amber)"></span>Kubernetes</div>
+        <div class="tchip"><span class="tcd" style="background:var(--amber)"></span>REST APIs</div>
+        <div class="tchip"><span class="tcd" style="background:var(--amber)"></span>gRPC</div>
+        <div class="tchip"><span class="tcd" style="background:var(--amber)"></span>GitHub Actions</div>
+      </div>
+      <div class="tpanel" id="tt-fe">
+        <div class="tchip"><span class="tcd" style="background:#9664ff"></span>React + TypeScript</div>
+        <div class="tchip"><span class="tcd" style="background:#9664ff"></span>WebSocket</div>
+        <div class="tchip"><span class="tcd" style="background:#9664ff"></span>Tailwind CSS</div>
+        <div class="tchip"><span class="tcd" style="background:#9664ff"></span>Recharts</div>
+      </div>
+    </div>
+  </main>
+  <script>
+    function dTab(id, btn) { document.querySelectorAll('.tp').forEach(p => p.classList.remove('on')); document.querySelectorAll('.tab-bar .tb').forEach(b => b.classList.remove('on')); document.getElementById('dt-' + id).classList.add('on'); btn.classList.add('on') }
+    function tAcc(btn) { const b = btn.nextElementSibling, was = btn.classList.contains('open'); document.querySelectorAll('.acc-h.open').forEach(h => { h.classList.remove('open'); h.nextElementSibling.classList.remove('open') }); if (!was) { btn.classList.add('open'); b.classList.add('open') } }
+    const pd = [{ t: 'Detect', c: 'var(--accent)', b: 'Identify drift, sensitive fields, quality issues, or preprocessing needs in real time as records arrive. Each service runs its detector independently.' }, { t: 'Evaluate', c: 'var(--accent2)', b: 'Assign a risk score, choose the appropriate protection rule, or generate candidate cleaning actions. Determines what — if anything — is needed for this record.' }, { t: 'Act', c: 'var(--amber)', b: 'Route to staging, mask or transform sensitive data, apply suggested cleaning fixes, or trigger AI agents for unstructured content.' }, { t: 'Control', c: '#9664ff', b: 'Allow a human operator to review and confirm decisions for high-risk or ambiguous records before moving downstream.' }];
+    function setPipe(i) { document.querySelectorAll('.ps').forEach((s, j) => { s.style.borderColor = j === i ? 'rgba(0,229,200,.3)' : 'var(--border)'; s.style.color = j === i ? pd[i].c : 'var(--text2)' }); document.getElementById('pd-title').textContent = pd[i].t; document.getElementById('pd-title').style.color = pd[i].c; document.getElementById('pd-body').textContent = pd[i].b }
+    function tTech(id, btn) { document.querySelectorAll('.tpanel').forEach(p => p.classList.remove('on')); document.querySelectorAll('.ttb').forEach(b => b.classList.remove('on')); document.getElementById('tt-' + id).classList.add('on'); btn.classList.add('on') }
+  </script>
+</body>
+
+</html>

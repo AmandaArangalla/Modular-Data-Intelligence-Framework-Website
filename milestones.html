@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataIntel — Milestones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: #07090f;
+      color: #e4ebf8;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7
+    }
+
+    :root {
+      --accent: #00e5c8;
+      --accent2: #4f8ef7;
+      --amber: #ffb43c;
+      --text2: #8a9ac0;
+      --text3: #4e5e80;
+      --surface: #161c2e;
+      --surface2: #1d2540;
+      --border: rgba(255, 255, 255, .06)
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 15, .92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 60px
+    }
+
+    .brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-decoration: none
+    }
+
+    .brand span:first-child {
+      color: var(--accent)
+    }
+
+    .brand span:last-child {
+      color: #e4ebf8
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none
+    }
+
+    .nav-links a {
+      display: block;
+      padding: .38rem .85rem;
+      font-size: .88rem;
+      color: var(--text2);
+      text-decoration: none;
+      border-radius: 7px;
+      transition: all .15s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #e4ebf8;
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .nav-links a.active {
+      color: var(--accent)
+    }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #07090f !important;
+      font-weight: 600 !important;
+      border-radius: 7px !important;
+      padding: .38rem 1.1rem !important
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem
+    }
+
+    .page-tag {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .75rem
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem
+    }
+
+    .intro {
+      color: var(--text2);
+      font-size: 1rem;
+      max-width: 640px;
+      margin-bottom: .75rem
+    }
+
+    /* Milestone filter */
+    .filter-wrap {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      flex-wrap: wrap;
+      margin: 2rem 0
+    }
+
+    .filter-wrap label {
+      font-size: .82rem;
+      color: var(--text2);
+      font-weight: 500
+    }
+
+    .milestone-select {
+      min-width: 230px;
+      background: var(--surface);
+      border: 1px solid rgba(0, 229, 200, .24);
+      color: #e4ebf8;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .86rem;
+      padding: .65rem 2.5rem .65rem 1rem;
+      border-radius: 10px;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+      background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat
+    }
+
+    .milestone-select:focus {
+      border-color: rgba(0, 229, 200, .55)
+    }
+
+    .milestone-select option {
+      background: #0c1018
+    }
+
+    .ftb {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem;
+      padding: .38rem .9rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .ftb:hover {
+      color: #e4ebf8;
+      background: var(--surface2)
+    }
+
+    .ftb.on {
+      background: rgba(0, 229, 200, .09);
+      border-color: rgba(0, 229, 200, .35);
+      color: var(--accent)
+    }
+
+    /* Summary bar */
+    .summary {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.75rem;
+      margin-bottom: 2.5rem
+    }
+
+    .sm-item {
+      display: flex;
+      align-items: center;
+      gap: .65rem
+    }
+
+    .sm-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .sm-label {
+      font-size: .82rem;
+      color: var(--text2)
+    }
+
+    .sm-count {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-left: .25rem
+    }
+
+    /* Progress overview bar */
+    .prog-overview {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.75rem;
+      margin-bottom: 2.5rem
+    }
+
+    .prog-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .65rem;
+      font-size: .85rem;
+      color: var(--text2)
+    }
+
+    .prog-track {
+      height: 8px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 4px;
+      overflow: hidden
+    }
+
+    .prog-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: var(--accent);
+      width: 0;
+      transition: width 1s ease
+    }
+
+    /* Timeline */
+    .tl {
+      position: relative;
+      margin-top: 1rem
+    }
+
+    .tl-line {
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--surface2)
+    }
+
+    .tl-fill {
+      position: absolute;
+      left: 28px;
+      top: 0;
+      width: 2px;
+      background: var(--accent);
+      transition: height .8s ease
+    }
+
+    .tli {
+      display: flex;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      cursor: pointer
+    }
+
+    .tli.hidden {
+      display: none
+    }
+
+    .tld {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: .4rem;
+      position: relative;
+      z-index: 1;
+      border: 2px solid #07090f;
+      margin-left: 20px
+    }
+
+    .tld.done {
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 229, 200, .15)
+    }
+
+    .tld.act {
+      background: var(--accent2);
+      box-shadow: 0 0 0 5px rgba(79, 142, 247, .15);
+      animation: rip 2s infinite
+    }
+
+    .tld.up {
+      background: var(--surface2);
+      border-color: var(--text3)
+    }
+
+    @keyframes rip {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 3px rgba(79, 142, 247, .2)
+      }
+
+      50% {
+        box-shadow: 0 0 0 7px rgba(79, 142, 247, .05)
+      }
+    }
+
+    .tlc {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      transition: all .2s
+    }
+
+    .tli:hover .tlc,
+    .tli.exp .tlc {
+      border-color: rgba(0, 229, 200, .22);
+      background: var(--surface2)
+    }
+
+    .tlh {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    .tlt {
+      font-weight: 500;
+      font-size: .97rem
+    }
+
+    .tlm {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      flex-wrap: wrap
+    }
+
+    .tld2 {
+      font-size: .8rem;
+      color: var(--text3)
+    }
+
+    .tlmk {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700
+    }
+
+    .tlmk small {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .72rem;
+      color: var(--text3);
+      font-weight: 400
+    }
+
+    .sb {
+      font-size: .72rem;
+      font-weight: 500;
+      padding: .22rem .65rem;
+      border-radius: 100px
+    }
+
+    .sb-d {
+      background: rgba(0, 229, 200, .09);
+      color: var(--accent)
+    }
+
+    .sb-p {
+      background: rgba(79, 142, 247, .09);
+      color: var(--accent2)
+    }
+
+    .sb-u {
+      background: rgba(255, 180, 60, .09);
+      color: var(--amber)
+    }
+
+    .tlx {
+      display: none;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: .88rem;
+      color: var(--text2);
+      line-height: 1.75
+    }
+
+    .tli.exp .tlx {
+      display: block;
+      animation: fi .2s ease
+    }
+
+    @keyframes fi {
+      from {
+        opacity: 0;
+        transform: translateY(4px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .tlch {
+      font-size: .8rem;
+      color: var(--text3);
+      transition: transform .2s;
+      flex-shrink: 0
+    }
+
+    .tli.exp .tlch {
+      transform: rotate(180deg);
+      color: var(--accent)
+    }
+
+    .pb {
+      height: 5px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 3px;
+      margin-top: .85rem;
+      overflow: hidden
+    }
+
+    .pf {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--accent);
+      transition: width .6s ease
+    }
+
+    .deliverables {
+      margin-top: .85rem
+    }
+
+    .deliverables h4 {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text3);
+      margin-bottom: .5rem
+    }
+
+    .deliverables ul {
+      list-style: none
+    }
+
+    .deliverables li {
+      font-size: .84rem;
+      color: var(--text2);
+      padding: .2rem 0 .2rem 1rem;
+      position: relative
+    }
+
+    .deliverables li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: .76rem
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a class="brand" href="home.html"><span>DATA</span><span>INTEL</span></a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="domain.html">Domain</a></li>
+      <li><a href="milestones.html" class="active">Milestones</a></li>
+      <li><a href="documents.html">Documents</a></li>
+      <li><a href="slides.html">Slides</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+  <main>
+    <p class="page-tag">Project Timeline</p>
+    <h1>Milestones &amp; Assessments</h1>
+    <p class="intro">Track all project assessments, dates, marks, and progress. Click any milestone to expand its
+      details.</p>
+
+    <div class="prog-overview">
+      <div class="prog-label"><span>Overall project completion</span><span id="pct">60%</span></div>
+      <div class="prog-track">
+        <div class="prog-fill" id="main-prog" style="width:0"></div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="sm-item"><span class="sm-dot" style="background:var(--accent)"></span><span
+          class="sm-label">Completed</span><span class="sm-count" style="color:var(--accent)">3</span></div>
+      <div class="sm-item"><span class="sm-dot" style="background:var(--accent2)"></span><span class="sm-label">In
+          Progress</span><span class="sm-count" style="color:var(--accent2)">1</span></div>
+      <div class="sm-item"><span class="sm-dot" style="background:var(--amber)"></span><span
+          class="sm-label">Upcoming</span><span class="sm-count" style="color:var(--amber)">1</span></div>
+      <div class="sm-item" style="margin-left:auto"><span class="sm-label">Total marks</span><span
+          class="sm-count">100%</span></div>
+    </div>
+
+    <div class="filter-wrap">
+      <label for="milestoneFilter">Choose milestone status</label>
+      <select id="milestoneFilter" class="milestone-select" onchange="filterTl(this.value)">
+        <option value="all">All milestones</option>
+        <option value="done">Completed</option>
+        <option value="act">In progress</option>
+        <option value="up">Upcoming</option>
+      </select>
+    </div>
+
+    <div class="tl">
+      <div class="tl-line"></div>
+      <div class="tl-fill" id="tlf" style="height:0"></div>
+
+      <div class="tli" data-status="done" onclick="expTl(this,0)">
+        <div class="tld done"></div>
+        <div class="tlc">
+          <div class="tlh">
+            <span class="tlt">Project Proposal Presentation</span>
+            <div class="tlm"><span class="sb sb-d">Completed</span><span class="tld2">Semester 1</span><span
+                class="tlmk">15%<small> of total</small></span><span class="tlch">▼</span></div>
+          </div>
+          <div class="tlx">
+            <p>Initial research proposal covering problem statement, proposed solution architecture, and literature
+              review summary. Evaluated on novelty, feasibility, and clarity of objectives.</p>
+            <div class="pb">
+              <div class="pf" style="width:100%"></div>
+            </div>
+            <p style="font-size:.78rem;color:var(--text3);margin-top:.4rem">100% — Submitted &amp; approved</p>
+            <div class="deliverables" style="margin-top:1rem">
+              <h4>Deliverables</h4>
+              <ul>
+                <li>Research proposal document</li>
+                <li>Literature survey summary</li>
+                <li>Problem statement &amp; objectives</li>
+                <li>Supervisor sign-off</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tli" data-status="done" onclick="expTl(this,1)">
+        <div class="tld done"></div>
+        <div class="tlc">
+          <div class="tlh">
+            <span class="tlt">Progress Presentation 1</span>
+            <div class="tlm"><span class="sb sb-d">Completed</span><span class="tld2">Semester 2, Week 4</span><span
+                class="tlmk">15%<small> of total</small></span><span class="tlch">▼</span></div>
+          </div>
+          <div class="tlx">
+            <p>First review demonstrating initial implementation of the schema drift detection and privacy preservation
+              modules. Included live demo of schema change routing and attribute masking.</p>
+            <div class="pb">
+              <div class="pf" style="width:100%"></div>
+            </div>
+            <p style="font-size:.78rem;color:var(--text3);margin-top:.4rem">100% — Presented &amp; passed</p>
+            <div class="deliverables" style="margin-top:1rem">
+              <h4>Deliverables</h4>
+              <ul>
+                <li>Service 01 — Schema drift detection (prototype)</li>
+                <li>Service 02 — Privacy preservation (prototype)</li>
+                <li>Presentation slides</li>
+                <li>Updated progress report</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tli" data-status="act" onclick="expTl(this,2)">
+        <div class="tld done"></div>
+        <div class="tlc">
+          <div class="tlh">
+            <span class="tlt">Progress Presentation 2</span>
+            <div class="tlm"><span class="sb sb-d">Completed</span><span class="tld2">Semester 2, Week 9</span><span
+                class="tlmk">15%<small> of total</small></span><span class="tlch">▼</span></div>
+          </div>
+          <div class="tlx">
+            <p>Second review covering structured data cleaning and agentic preprocessing service development. Will
+              demonstrate the cleaning suggestion UI and agent coordination for text streams.</p>
+            <div class="pb">
+              <div class="pf" style="width:65%"></div>
+            </div>
+            <p style="font-size:.78rem;color:var(--text3);margin-top:.4rem">65% — Development ongoing</p>
+            <div class="deliverables" style="margin-top:1rem">
+              <h4>Deliverables</h4>
+              <ul>
+                <li>Service 03 — Structured data cleaning (in development)</li>
+                <li>Service 04 — Agentic preprocessing (in development)</li>
+                <li>Human-in-the-loop review UI</li>
+                <li>Presentation slides</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tli" data-status="act" onclick="expTl(this,3)">
+        <div class="tld act"></div>
+        <div class="tlc">
+          <div class="tlh">
+            <span class="tlt">Final Assessment</span>
+            <div class="tlm"><span class="sb sb-p">In Progress</span><span class="tld2">Semester 3, Week 2</span><span
+                class="tlmk">40%<small> of total</small></span><span class="tlch">▼</span></div>
+          </div>
+          <div class="tlx">
+            <p>Full system demonstration with all four services integrated, evaluated on real-world streaming pipeline
+              scenarios. Benchmarks for latency overhead, detection accuracy, and quality improvement will be presented.
+            </p>
+            <div class="pb">
+              <div class="pf" style="width:10%"></div>
+            </div>
+            <p style="font-size:.78rem;color:var(--text3);margin-top:.4rem">10% — Planning phase</p>
+            <div class="deliverables" style="margin-top:1rem">
+              <h4>Deliverables</h4>
+              <ul>
+                <li>Complete integrated system demo</li>
+                <li>Benchmark evaluation report</li>
+                <li>Final dissertation document</li>
+                <li>Presentation slides</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tli" data-status="up" onclick="expTl(this,4)">
+        <div class="tld up"></div>
+        <div class="tlc">
+          <div class="tlh">
+            <span class="tlt">Viva Voce</span>
+            <div class="tlm"><span class="sb sb-u">Upcoming</span><span class="tld2">Semester 3, Week 4</span><span
+                class="tlmk">15%<small> of total</small></span><span class="tlch">▼</span></div>
+          </div>
+          <div class="tlx">
+            <p>Individual oral examination covering each member's research contribution, design decisions,
+              implementation choices, and evaluation outcomes of the full framework.</p>
+            <div class="pb">
+              <div class="pf" style="width:0%"></div>
+            </div>
+            <p style="font-size:.78rem;color:var(--text3);margin-top:.4rem">0% — Not started</p>
+            <div class="deliverables" style="margin-top:1rem">
+              <h4>Preparation checklist</h4>
+              <ul>
+                <li>Individual contribution documentation</li>
+                <li>System architecture walkthrough</li>
+                <li>Results &amp; evaluation readiness</li>
+                <li>Q&amp;A preparation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const prog = [1, 1, .65, .1, 0];
+    function expTl(item, i) {
+      const was = item.classList.contains('exp');
+      document.querySelectorAll('.tli').forEach(t => t.classList.remove('exp'));
+      if (!was) {
+        item.classList.add('exp');
+        const items = [...document.querySelectorAll('.tli:not(.hidden)')];
+        const idx = items.indexOf(item);
+        let h = 0;
+        for (let j = 0; j < items.length; j++) {
+          const si = parseInt(items[j].dataset.si || j);
+          if (j < idx) h += 1; else if (j === idx) { h += prog[i]; break; }
+        }
+        document.getElementById('tlf').style.height = (h / 5 * 100) + '%';
+      }
+    }
+    function filterTl(type) {
+      document.querySelectorAll('.tli').forEach(t => {
+        t.classList.remove('exp');
+        t.classList.toggle('hidden', type !== 'all' && t.dataset.status !== type);
+      });
+      document.getElementById('tlf').style.height = '0';
+    }
+    setTimeout(() => { document.getElementById('main-prog').style.width = '40%' }, 400);
+  </script>
+</body>
+
+</html>
